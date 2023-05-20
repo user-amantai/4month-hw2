@@ -21,23 +21,28 @@
 // }
 
 // export default App;
-import React, { useState } from 'react';
-
-let Square = () => {
-  const [colorA, setColorA] = useState('red')
-  const [colorB, setColorB] = useState('blue')
-  let renderColors = () => {
-    setColorA(colorA === 'red' ? 'blue' : 'red');
-    setColorB(colorB === 'red' ? 'blue' : 'red');
+import React from "react";
+class Square extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      colorBlue: 'blue',
+      colorRed: 'red'
+    }
   }
-  return (
-    <div style={{display:'flex', justifyContent:'center', alignItems:'center',gap:'20px', backgroundColor: 'teal', height:'120px',maxWidth:'320px'}}>
-      <div style={{ width: '100px', height: '100px', backgroundColor: colorA, borderRadius: '50px'}}
-        onClick={renderColors}></div>
-      <div style={{ width: '100px', height: '100px', backgroundColor: colorB, borderRadius: '50px'}}
-        onClick={renderColors}></div>
+  renderColors = () => {
+    this.setState((changeColor) => ({
+      colorBlue: changeColor.colorRed,
+      colorRed: changeColor.colorBlue
+    }))
+  }
+  render(){
+    return(
+      <div style={{display:'flex', justifyContent:'center', alignItems:'center',gap:'20px', backgroundColor: 'teal', height:'120px',maxWidth:'320px'}}>
+        <div style={{ width: '100px', height: '100px', backgroundColor: this.state.colorBlue, borderRadius: '50px'}} onClick={this.renderColors}></div>
+        <div style={{ width: '100px', height: '100px', backgroundColor: this.state.colorRed, borderRadius: '50px'}} onClick={this.renderColors}></div>
     </div>
-  );
-};
-
+    )
+  }
+}
 export default Square;
